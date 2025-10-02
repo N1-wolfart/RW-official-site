@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>RW Site</title>
+  <!-- iOS用ホーム画面アプリ化 -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="https://github.com/user-attachments/assets/958aea63-ef4b-483f-96d4-06b4218ac286">
+  <link rel="icon" href="https://github.com/user-attachments/assets/958aea63-ef4b-483f-96d4-06b4218ac286" type="image/png">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: #000;
+      color: #fff;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      background-color: #111;
+      box-shadow: 0 0 10px #222;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    header img {
+      width: 60px;
+      height: 60px;
+    }
+
+    nav a {
+      margin-left: 20px;
+      color: #0ff;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    nav a:hover {
+      text-shadow: 0 0 10px #0ff;
+    }
+
+    section {
+      display: none;
+      padding: 50px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    section.active {
+      display: block;
+    }
+
+    /* Home */
+    #home h1 {
+      font-size: 3rem;
+      color: #0ff;
+      margin-bottom: 20px;
+      text-align: center;
+      text-shadow: 0 0 8px #0ff;
+    }
+
+    #home p {
+      max-width: 1000px;
+      margin: 0 auto 40px auto;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: #ccc;
+      text-align: center;
+    }
+
+    /* RW Events */
+    #rw-events h2 {
+      text-align: center;
+      font-size: 2rem;
+      color: #0ff;
+      margin-bottom: 20px;
+      text-shadow: 0 0 6px #0ff;
+    }
+
+    .videos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      justify-items: center;
+      margin: 0 auto;
+    }
+
+    .videos a img {
+      width: 200px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 10px;
+      transition: transform 0.2s;
+    }
+
+    .videos a img:hover {
+      transform: scale(1.05);
+    }
+
+    /* How to Join */
+    #how-to-join h2 {
+      text-align: center;
+      font-size: 2rem;
+      color: #0ff;
+      margin-bottom: 20px;
+      text-shadow: 0 0 6px #0ff;
+    }
+
+    #how-to-join p {
+      color: #ccc;
+      font-size: 1rem;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    /* Member Section */
+    #member-section h2 {
+      text-align: center;
+      font-size: 2rem;
+      color: #0ff;
+      margin-bottom: 30px;
+      text-shadow: 0 0 6px #0ff;
+    }
+
+    .member-scroll {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      width: 100%;
+    }
+
+    .member-card {
+      display: flex;
+      align-items: center;
+      background-color: #222;
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 0 8px #333;
+      transition: transform 0.2s;
+      cursor: pointer;
+    }
+
+    .member-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 12px #0ff;
+    }
+
+    .member-card img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin-right: 15px;
+      object-fit: cover;
+      border: 2px solid #0ff;
+    }
+
+    .member-info h3 {
+      margin: 0;
+      font-size: 1.2rem;
+      color: #0ff;
+    }
+
+    .member-info p {
+      margin: 5px 0 0 0;
+      font-size: 0.9rem;
+      color: #ccc;
+    }
+
+    @media (max-width: 1024px) {
+      .member-scroll { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .member-scroll { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 480px) {
+      .member-scroll { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="https://github.com/user-attachments/assets/958aea63-ef4b-483f-96d4-06b4218ac286" alt="RW Logo">
+    <nav>
+      <a onclick="showSection('home')">Home</a>
+      <a onclick="showSection('how-to-join')">How to Join</a>
+      <a onclick="showSection('member-section')">Member</a>
+    </nav>
+  </header>
+
+  <!-- Home Section -->
+  <section id="home" class="active">
+    <h1>We are RW</h1>
+    <p>
+      I'm the leader of RW.<br>
+      We founded this clan with my close friend and current sub-leader, wolfart, back when I couldn't use Discord.<br>
+      My goal was simple: to create a powerful clan that anyone could join, even without being on Discord.<br>
+      The name's origin, 𝓡𝓮𝓽𝓾𝓻𝓷𝓲𝓷𝓰 𝓦𝓪𝓻𝓻𝓲𝓸𝓻, reflects our belief in learning from past setbacks.<br>
+      We want to take a "failed" experience and use it to build something even greater this time.<br>
+      Join us! Let's work together to make RW an even better clan—one we can proudly stand behind in any fight.<br>
+      by 7003狐面
+    </p>
+
+    <!-- RW Events Section -->
+    <h2 style="text-align:center; font-size:2rem; color:#0ff; text-shadow:0 0 6px #0ff; margin-bottom:20px;">RW Events</h2>
+<div style="
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap:20px;
+  justify-items:center;
+  max-width:1000px;
+  margin:0 auto;
+">
+  <a href="https://www.youtube.com/watch?v=52-nan_4WME" target="_blank" rel="noopener">
+    <img src="https://img.youtube.com/vi/52-nan_4WME/hqdefault.jpg" alt="52-nan_4WME" style="width:200px; height:120px; object-fit:cover; border-radius:10px; transition: transform 0.2s;">
+  </a>
+  <a href="https://www.youtube.com/watch?v=uF1nIKzfmSs" target="_blank" rel="noopener">
+    <img src="https://img.youtube.com/vi/uF1nIKzfmSs/hqdefault.jpg" alt="uF1nIKzfmSs" style="width:200px; height:120px; object-fit:cover; border-radius:10px; transition: transform 0.2s;">
+  </a>
+  <a href="https://www.youtube.com/watch?v=WaI97OOZW1c" target="_blank" rel="noopener">
+    <img src="https://img.youtube.com/vi/WaI97OOZW1c/hqdefault.jpg" alt="WaI97OOZW1c" style="width:200px; height:120px; object-fit:cover; border-radius:10px; transition: transform 0.2s;">
+  </a>
+  <a href="https://www.youtube.com/watch?v=-Tl3GtH1ZDQ" target="_blank" rel="noopener">
+    <img src="https://img.youtube.com/vi/-Tl3GtH1ZDQ/hqdefault.jpg" alt="-Tl3GtH1ZDQ" style="width:200px; height:120px; object-fit:cover; border-radius:10px; transition: transform 0.2s;">
+  </a>
+  <a href="https://www.youtube.com/watch?v=lxRcOkq_mL0" target="_blank" rel="noopener">
+    <img src="https://img.youtube.com/vi/lxRcOkq_mL0/hqdefault.jpg" alt="lxRcOkq_mL0" style="width:200px; height:120px; object-fit:cover; border-radius:10px; transition: transform 0.2s;">
+  </a>
+</div>
+
+  </section>
+
+<!-- How to Join Section -->
+<section id="how-to-join">
+  <h2 style="text-align:center; font-size:2rem; color:#0ff; text-shadow:0 0 6px #0ff; margin-bottom:20px;">How to Join RW</h2>
+
+  <p style="text-align:center; color:#ccc; max-width:800px; margin:0 auto 40px auto; line-height:1.6;">
+    RW Member Admission Test Rules. Follow the steps below to become a member.
+  </p>
+
+  <div style="display:flex; flex-direction:column; gap:20px; max-width:900px; margin:0 auto;">
+
+    <!-- Step 1: Fruit -->
+    <div style="background-color:#111; border:2px solid #0ff; border-radius:10px; padding:20px;">
+      <h3 style="color:#0ff; margin-bottom:10px;">Step 1: Fruit</h3>
+      <p style="color:#ccc; line-height:1.5;">
+        Take a photo of the fruit at the gatehouse and ping <strong>&lt;@🍎fruits&gt;</strong> to report it with the photo.
+      </p>
+    </div>
+
+    <!-- Step 2: TA -->
+    <div style="background-color:#111; border:2px solid #0ff; border-radius:10px; padding:20px;">
+      <h3 style="color:#0ff; margin-bottom:10px;">Step 2: TA</h3>
+      <p style="color:#ccc; line-height:1.5;">
+        Capture the flag in the Arena within 13 seconds.<br>
+        Submit a video to the examiner, or have the examiner accompany you during the test.
+      </p>
+    </div>
+
+    <!-- Step 3: Skill Assessment -->
+    <div style="background-color:#111; border:2px solid #0ff; border-radius:10px; padding:20px;">
+      <h3 style="color:#0ff; margin-bottom:10px;">Step 3: Skill Assessment</h3>
+      <p style="color:#ccc; line-height:1.5;">
+        Win a 1v1 “first-to-10” match against a test <strong>&lt;@examiner&gt;</strong>.<br>
+        Maps: Castle or Arena / Bow: any bow.<br>
+        Regeneration is limited to 12.<br>
+        Examiners are officially recognized clan members.<br>
+        If you fail, you may retake no sooner than one week later. After failing twice, wait 1–2 months before trying again.
+      </p>
+    </div>
+
+    <!-- Step 4: Trustworthiness Assessment -->
+    <div style="background-color:#111; border:2px solid #0ff; border-radius:10px; padding:20px;">
+      <h3 style="color:#0ff; margin-bottom:10px;">Step 4: Trustworthiness Assessment</h3>
+      <p style="color:#ccc; line-height:1.5;">
+        Your behavior, attitude, and manners within the clan will be evaluated based on:<br>
+        - Any history of rule violations<br>
+        - Communication skills<br>
+        - Sense of responsibility and willingness to report issues<br>
+        You will pass if at least 60% of current members approve you in a trust vote.
+      </p>
+    </div>
+
+    <!-- Rules After Admission -->
+    <div style="background-color:#111; border:2px solid #0ff; border-radius:10px; padding:20px;">
+      <h3 style="color:#0ff; margin-bottom:10px;">Rules After Admission</h3>
+      <p style="color:#ccc; line-height:1.5;">
+        If you break rules or undermine trust, the leader and sub-leaders will deliberate and you may be banned depending on the outcome.
+      </p>
+    </div>
+
+    <!-- Notes -->
+    <div style="background-color:#111; border:2px solid #0ff; border-radius:10px; padding:20px;">
+      <h3 style="color:#0ff; margin-bottom:10px;">Notes</h3>
+      <p style="color:#ccc; line-height:1.5;">
+        Test and operational rules may be revised at any time depending on the state of the clan.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+  <!-- Member Section -->
+  <section id="member-section">
+    <h2>Member</h2>
+    <div class="member-scroll">
+      <div class="member-card"><img src="https://github.com/user-attachments/assets/19ac82eb-f4f5-4ae5-9f80-a2096b94a1b4" alt="Member1"><div class="member-info"><h3>7003狐面</h3><p>Hahaha... I'm sleepy...</p></div></div>
+      <div class="member-card"><img src="https://github.com/user-attachments/assets/dd1021ac-822e-4629-9198-c7a502beb961" alt="Member2"><div class="member-info"><h3>wolfart</h3><p>not fart</p></div></div>
+      <div class="member-card"><img src="https://github.com/user-attachments/assets/db169869-2ba4-4131-9f25-3487be219bef" alt="Member3"><div class="member-info"><h3>yakitori</h3><p>N1 enjoyer</p></div></div>
+      <div class="member-card"><img src="https://github.com/user-attachments/assets/a56505b2-82d0-4511-995f-e3df8aee5e45" alt="Member4"><div class="member-info"><h3>sum whistle</h3><p>hey guys. im nub player.</p></div></div>
+      <div class="member-card"><img src="https://github.com/user-attachments/assets/8b4b142d-d0a1-461a-a3c2-3b717a93f389" alt="Member5"><div class="member-info"><h3>JT</h3><p>Let's get along well</p></div></div>
+      <div class="member-card"><img src="https://via.placeholder.com/100" alt="Member6"><div class="member-info"><h3>alice</h3><p>一言メッセージ6</p></div></div>
+      <div class="member-card"><img src="https://github.com/user-attachments/assets/d0be860b-b9af-47fd-8750-f5d5096c9088" alt="Member7"><div class="member-info"><h3>Suisei</h3><p>一般通過星詠み</p></div></div>
+      <div class="member-card"><img src="https://via.placeholder.com/100" alt="Member8"><div class="member-info"><h3>OSOBA</h3><p>一言メッセージ8</p></div></div>
+      <div class="member-card"><img src="https://via.placeholder.com/100" alt="Member9"><div class="member-info"><h3>ZH</h3><p>一言メッセージ9</p></div></div>
+      <div class="member-card"><img src="https://via.placeholder.com/100" alt="Member10"><div class="member-info"><h3>砂場</h3><p>一言メッセージ10</p></div></div>
+      <div class="member-card"><img src="https://via.placeholder.com/100" alt="Member11"><div class="member-info"><h3>7999</h3><p>一言メッセージ11</p></div></div>
+      <div class="member-card"><img src="https://via.placeholder.com/100" alt="Member12"><div class="member-info"><h3>5809</h3><p>一言メッセージ12</p></div></div>
+      <div class="member-card"><img src="https://via.placeholder.com/100" alt="Member13"><div class="member-info"><h3>MK</h3><p>一言メッセージ13</p></div></div>
+      <div class="member-card"><img src="https://github.com/user-attachments/assets/632821c4-a318-4423-b2a7-b093e1ed9066" alt="Member14"><div class="member-info"><h3>takuh</h3><p>引退はしてないから！誘われたら行くこともあるから！</p></div></div>
+      <div class="member-card"><img src="https://via.placeholder.com/100" alt="Member15"><div class="member-info"><h3>kamikaze</h3><p>一言メッセージ15</p></div></div>
+      <div class="member-card"><img src="https://github.com/user-attachments/assets/2d4d55c6-d20b-4432-ab17-5884ffacba11" alt="Member16"><div class="member-info"><h3>MAKONEKO</h3><p>It's me MAKO</p></div></div>
+      <div class="member-card"><img src="https://github.com/user-attachments/assets/33923115-f713-4435-92b8-9132e687db3f" alt="Member17"><div class="member-info"><h3>hayakunero</h3><p>一言メッセージ17</p></div></div>
+      <div class="member-card"><img src="https://via.placeholder.com/100" alt="Member18"><div class="member-info"><h3>penguin</h3><p>一言メッセージ18</p></div></div>
+      <div class="member-card"><img src="https://via.placeholder.com/100" alt="Member19"><div class="member-info"><h3>majesty</h3><p>一言メッセージ19</p></div></div>
+      <div class="member-card"><img src="https://via.placeholder.com/100" alt="Member20"><div class="member-info"><h3>Kashimo</h3><p>一言メッセージ20</p></div></div>
+      <div class="member-card"><img src="https://via.placeholder.com/100" alt="Member21"><div class="member-info"><h3>wurenjun</h3><p>一言メッセージ21</p></div></div>
+      <div class="member-card"><img src="https://via.placeholder.com/100" alt="Member22"><div class="member-info"><h3>abcde</h3><p>一言メッセージ22</p></div></div>
+      <div class="member-card"><img src="https://via.placeholder.com/100" alt="Member23"><div class="member-info"><h3>cassgeta</h3><p>一言メッセージ23</p></div></div>
+      <div class="member-card"><img src="https://via.placeholder.com/100" alt="Member24"><div class="member-info"><h3>Nov4</h3><p>一言メッセージ24</p></div></div>
+    </div>
+  </section>
+
+  <script>
+    function showSection(id) {
+      document.querySelectorAll('section').forEach(sec=>{
+        sec.classList.remove('active');
+      });
+      document.getElementById(id).classList.add('active');
+    }
+  </script>
+
+  <footer style="
+    background-color:#111;
+    color:#0ff;
+    text-align:center;
+    padding:20px 10px;
+    box-shadow: 0 -2px 10px #222;
+    font-size:0.9rem;
+  ">
+    <p>&copy; 2025 RW Clan. All rights reserved.</p>
+    <p>
+      <a href="https://discord.gg/5vmnc4GAPs" target="_blank" style="color:#0ff; text-decoration:none; margin:0 10px;">Discord</a> |
+      <a href="https://www.youtube.com/@RW.N1Clan" target="_blank" style="color:#0ff; text-decoration:none; margin:0 10px;">YouTube</a>
+    </p>
+  </footer>
+</body>
+</html>
